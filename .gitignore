@@ -27,3 +27,4 @@ dist/
 
 # utility / temp
 /opencode
+.vercel
