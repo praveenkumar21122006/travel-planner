@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "functions": {
+    "api/index.ts": {
+      "includeFiles": ["prisma/**"]
+    }
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
+}
