@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at")
+  trips        Trip[]
+
+  @@map("users")
+}
+
+model Trip {
+  id              String     @id @default(uuid())
+  userId          String     @map("user_id")
+  destinationCity String     @map("destination_city")
+  country         String
+  startDate       DateTime   @map("start_date")
+  endDate         DateTime   @map("end_date")
+  createdAt       DateTime   @default(now()) @map("created_at")
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  activities      Activity[]
+
+  @@index([userId])
+  @@map("trips")
+}
+
+model Activity {
+  id        String   @id @default(uuid())
+  tripId    String   @map("trip_id")
+  dayNumber Int      @map("day_number")
+  timeSlot  String   @map("time_slot")
+  title     String
+  description String
+  createdAt DateTime @default(now()) @map("created_at")
+  trip      Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId])
+  @@map("activities")
+}

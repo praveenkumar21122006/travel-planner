@@ -1,0 +1,29 @@
+node_modules/
+dist/
+*.log
+*.tsbuildinfo
+
+# local env / secrets
+.env
+.env.*
+!.env.example
+
+# vercel / deployment local state
+.vercel/
+
+# archives
+*.zip
+
+# unrelated sibling projects in this workspace
+/bus_attendance
+/digital-bus-attendance
+/embedded-threat-modeler
+/patient-triage
+/ppe-monitor
+/private-chat
+/Project
+/support-assistant
+/webdev
+
+# utility / temp
+/opencode
